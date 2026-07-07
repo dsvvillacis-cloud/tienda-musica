@@ -1,0 +1,20 @@
+### Variables Globales
+@api = http://localhost:3000
+
+### 1. Petición POST - Crear un Instrumento Musical (Sin Request de Swagger, directo de código)
+POST {{api}}/instrumento
+Content-Type: application/json
+
+{
+  "nombre": "Parlante Monitor de Estudio",
+  "marca": "JBL",
+  "tipo": "Audio",
+  "precio": 250.00,
+  "stock": 8
+}
+
+###
+
+### 2. Petición GET - Listar todos los Instrumentos de la Tienda
+GET {{api}}/instrumento
+Content-Type: application/json
