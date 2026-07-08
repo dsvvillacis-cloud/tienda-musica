@@ -1,18 +1,19 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { IsString, IsNotEmpty, IsOptional, IsNumber, IsPositive, Min } from 'class-validator';
 
 export class CreateInstrumentoDto {
-  @ApiProperty({ description: 'Nombre del instrumento', example: 'Guitarra Eléctrica' })
-  nombre!: string;
+  @IsString()
+  @IsNotEmpty()
+  name: string;
 
-  @ApiProperty({ description: 'Marca del instrumento', example: 'Fender' })
-  marca!: string;
+  @IsString()
+  @IsOptional()
+  description?: string;
 
-  @ApiProperty({ description: 'Tipo o categoría de instrumento', example: 'Cuerda' })
-  tipo!: string;
+  @IsNumber({ maxDecimalPlaces: 2 })
+  @IsPositive()
+  price: number;
 
-  @ApiProperty({ description: 'Precio del instrumento', example: 1200.50 })
-  precio!: number;
-
-  @ApiProperty({ description: 'Cantidad disponible en bodega', example: 15 })
-  stock!: number;
+  @IsNumber()
+  @Min(0)
+  stock: number;
 }

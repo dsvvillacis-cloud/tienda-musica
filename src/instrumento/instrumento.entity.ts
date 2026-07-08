@@ -1,22 +1,23 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { OrderItemEntity } from '../order-item/order-item.entity';
 
-@Entity('instrumentos')
-export class Instrumento {
+@Entity({ name: 'instrumentos' })
+export class InstrumentoEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  nombre: string; // Aquí irá "Guitarra", "Batería", etc.
+  @Column({ type: 'varchar', length: 150 })
+  name: string;
 
-  @Column()
-  marca: string;
-
-  @Column()
-  tipo: string; // Cuerda, Percusión, etc.
+  @Column({ type: 'text', nullable: true })
+  description: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2 })
-  precio: number;
+  price: number;
 
-  @Column({ type: 'integer' })
+  @Column({ type: 'int', default: 0 })
   stock: number;
+
+  @OneToMany(() => OrderItemEntity, (orderItem) => orderItem.instrument)
+  orderItems: OrderItemEntity[];
 }
